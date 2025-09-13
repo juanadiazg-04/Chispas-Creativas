@@ -1,19 +1,19 @@
-/* ===== Estilos generales ===== */
+
 body {
   margin: 0;
   font-family: "Georgia", serif;
   line-height: 1.6;
-  background-color: #fdfaf5; /* crema suave */
+  background-color: #fdfaf5;
   color: #2c2c2c;
 }
 
-/* ===== Encabezado ===== */
+
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  background-color: #f7f1e8; /* beige claro */
+  background-color: #f7f1e8; 
   border-bottom: 2px solid #e3d9c6;
 }
 
@@ -40,10 +40,10 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #a67b5b; /* marrón cálido */
+  color: #a67b5b; 
 }
 
-/* ===== Secciones ===== */
+
 section {
   padding: 4rem 3rem;
   max-width: 900px;
@@ -78,7 +78,7 @@ blockquote {
   margin: 1.5rem 0;
 }
 
-/* ===== Formularios ===== */
+
 form {
   display: grid;
   gap: 1rem;
@@ -118,7 +118,7 @@ button:hover {
   background-color: #8c644a;
 }
 
-/* ===== Footer ===== */
+
 footer {
   background-color: #f7f1e8;
   border-top: 2px solid #e3d9c6;
@@ -135,4 +135,41 @@ footer nav ul {
 footer p {
   margin: 0;
   color: #6a5b4a;
+}
+ 
+
+.burger-menu {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+
+.nav-open {
+  display: flex !important;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+nav ul li a.active {
+  border-bottom: 2px solid #a67b5b;
+  color: #a67b5b;
+}
+
+
+@media (max-width: 768px) {
+  nav ul {
+    display: none;
+    background: #f7f1e8;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .burger-menu {
+    display: block;
+  }
 }
