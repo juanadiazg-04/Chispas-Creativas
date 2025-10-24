@@ -1,131 +1,634 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mirada Invertida</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chispas Creativas - Mirada Invertida</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F5F1E8;
+            --beige: #E8DCC4;
+            --dark-brown: #4A3F35;
+            --accent: #D4A574;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            padding: 1.5rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--dark-brown);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-brown);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 5%;
+            background: linear-gradient(135deg, var(--beige) 0%, var(--cream) 100%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark-brown);
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--dark-brown);
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-brown);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark-brown);
+            letter-spacing: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-features h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--beige);
+            font-size: 1rem;
+        }
+
+        .about-features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .course-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-card .read-more {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .course-card .read-more:hover {
+            color: var(--dark-brown);
+        }
+
+        /* Shop Section */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .shop-item {
+            background-color: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .shop-item:hover {
+            transform: scale(1.05);
+        }
+
+        .shop-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--beige) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--white);
+        }
+
+        .shop-info {
+            padding: 1.5rem;
+        }
+
+        .shop-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-brown);
+        }
+
+        .shop-info p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .shop-info .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Form */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--dark-brown);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--beige);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--dark-brown);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 5%;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--white);
+                flex-direction: column;
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                display: none;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <div>
-      <a href="#" aria-label="Logo">MIRADA <strong>INVERTIDA</strong></a>
-    </div>
-    <nav aria-label="Principal">
-      <ul>
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#courses">COURSES</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#home" class="logo">CHISPAS CREATIVAS</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#courses">COURSES</a></li>
+                <li><a href="#shop">SHOP</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
     </nav>
-  </header>
 
-  <main id="home">
-  
-    <section aria-labelledby="hero-title">
-      <h1 id="hero-title">Mirada Invertida</h1>
-
-      <blockquote>
-        <p>El neuromarketing estudia respuestas cerebrales al branding” →</p>
-        <p>“¿Qué pasaría si tu cerebro tuviera su propia marca?</p>
-      </blockquote>
-
-      <p>Fomenta pensamiento lateral, humor y reencuadre filosófico.</p>
-    </section>
-
-   
-    <section id="chispas-creativas" aria-labelledby="cc-title">
-      <h2 id="cc-title">CHISPAS CREATIVAS</h2>
-
-      <ul>
-        <li>Una metáfora visual, mini campaña ficticia, poema emocional, etc.</li>
-        <li>Incluso podrías enviar tu respuesta y recibir feedback de otros usuarios o la IA en tiempo real.</li>
-      </ul>
-
-      <section aria-labelledby="retos-title">
-        <h3 id="retos-title">Retos de Co-Creación</h3>
-      </section>
-    </section>
-
-   
-    <section id="chispa-retroactiva" aria-labelledby="cr-title">
-      <h2 id="cr-title">CHISPA RETROACTIVA</h2>
-
-      <blockquote>
-        <p>“¿Qué curiosidad pasada cambió algo en tu manera de ver el mundo?”</p>
-      </blockquote>
-      <p>Invita al metaconocimiento y la narrativa personal.</p>
-    </section>
-
- 
-    <section id="evolucion" aria-labelledby="evo-title">
-      <h2 id="evo-title">En vez de recibir un dato nuevo, la app te pregunta:</h2>
-
-      <p>Después de interactuar con varias chispas, la app te muestra un mapa de tu evolución:</p>
-      <ul>
-        <li>¿Tus preguntas tienden más hacia la identidad, la ética, el diseño?</li>
-        <li>Te ayuda a conocerte y a detectar patrones creativos.</li>
-      </ul>
-
-      <section aria-labelledby="impactometro-title">
-        <h3 id="impactometro-title">Función "Impactómetro"</h3>
-        <p><a href="#read-more">READ MORE</a></p>
-      </section>
-    </section>
-
-   
-    <section id="about" aria-label="About"></section>
-    <section id="courses" aria-label="Courses"></section>
-
-   
-    <section id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact</h2>
-      <p>Please fill out the form below to send us an email.</p>
-
-      <form action="#" method="post">
-        <div>
-          <label for="message">MESSAGE</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>MIRADA INVERTIDA</h1>
+            <p class="hero-subtitle">El neuromarketing estudia respuestas cerebrales al branding</p>
+            <p class="hero-description">
+                <strong>¿Qué pasaría si tu cerebro tuviera su propia marca?</strong><br>
+                Fomenta pensamiento lateral, humor y reencuadre filosófico.
+            </p>
+            <a href="#about" class="cta-button">Descubre Más</a>
         </div>
-
-        <div>
-          <label for="name">NAME</label>
-          <input id="name" name="name" type="text" required />
-        </div>
-
-        <div>
-          <label for="email">E-MAIL</label>
-          <input id="email" name="email" type="email" required />
-        </div>
-
-        <div>
-          <label for="subject">SUBJECT</label>
-          <input id="subject" name="subject" type="text" />
-        </div>
-
-        <button type="submit">SUBMIT</button>
-      </form>
-
-      <address>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>E-mail: <a href="mailto:hello@reallygreatsite.com">hello@reallygreatsite.com</a></p>
-      </address>
     </section>
-  </main>
 
-  <footer>
-    <nav aria-label="Secundaria">
-      <ul>
-        <li><a href="#home">CHISPAS CREATIVAS</a></li>
-        <li><a href="#about">ABOUT</a></li>
-        <li><a href="#courses">COURSES</a></li>
-        <li><a href="#contact">CONTACT</a></li>
-      </ul>
-    </nav>
-    <p>&copy; Mirada Invertida</p>
-  </footer>
-    
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">ABOUT</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>
+                    <strong>Chispas Creativas</strong> es un espacio de exploración donde el pensamiento lateral se encuentra con el reencuadre filosófico. Nuestra misión es despertar la curiosidad, desafiar perspectivas y fomentar la creatividad a través de experiencias únicas.
+                </p>
+                <p style="margin-top: 1.5rem;">
+                    Creemos que cada pregunta es una oportunidad para transformar la forma en que vemos el mundo. A través de nuestros cursos, retos y herramientas interactivas, te invitamos a descubrir nuevas maneras de pensar y crear.
+                </p>
+            </div>
+            <div class="about-features">
+                <h3>Lo que ofrecemos:</h3>
+                <ul>
+                    <li>🧠 Pensamiento lateral y creatividad</li>
+                    <li>✨ Retos de co-creación</li>
+                    <li>🎨 Campañas ficticias y metáforas visuales</li>
+                    <li>📊 Impactómetro personal</li>
+                    <li>🔄 Chispa retroactiva y metaconocimiento</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <h2 class="section-title">COURSES</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <h3>Retos de Co-Creación</h3>
+                <p>
+                    Desafíos creativos donde desarrollarás metáforas visuales, mini campañas ficticias, y poemas emocionales. Recibe feedback en tiempo real de la comunidad y la IA.
+                </p>
+                <a href="#contact" class="read-more">READ MORE →</a>
+            </div>
+            <div class="course-card">
+                <h3>Chispa Retroactiva</h3>
+                <p>
+                    "¿Qué curiosidad pasada cambió algo en tu manera de ver el mundo?" 
+                    Una invitación al metaconocimiento y la narrativa personal que transforma tu perspectiva.
+                </p>
+                <a href="#contact" class="read-more">READ MORE →</a>
+            </div>
+            <div class="course-card">
+                <h3>Función "Impactómetro"</h3>
+                <p>
+                    Después de interactuar con varias chispas, visualiza un mapa de tu evolución. Descubre si tus preguntas tienden hacia la identidad, la ética o el diseño.
+                </p>
+                <a href="#contact" class="read-more">READ MORE →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop">
+        <h2 class="section-title">SHOP</h2>
+        <div class="shop-grid">
+            <div class="shop-item">
+                <div class="shop-image">📚</div>
+                <div class="shop-info">
+                    <h3>Guía de Pensamiento Lateral</h3>
+                    <p>Un compendio de técnicas y ejercicios para desarrollar tu creatividad</p>
+                    <div class="price">$29.99</div>
+                    <button class="cta-button" onclick="addToCart('Guía de Pensamiento Lateral')">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-image">🎨</div>
+                <div class="shop-info">
+                    <h3>Kit Creativo Digital</h3>
+                    <p>Herramientas y plantillas para tus proyectos de co-creación</p>
+                    <div class="price">$49.99</div>
+                    <button class="cta-button" onclick="addToCart('Kit Creativo Digital')">Agregar al Carrito</button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <div class="shop-image">🧠</div>
+                <div class="shop-info">
+                    <h3>Curso Completo</h3>
+                    <p>Acceso total a todos nuestros cursos y materiales exclusivos</p>
+                    <div class="price">$99.99</div>
+                    <button class="cta-button" onclick="addToCart('Curso Completo')">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">CONTACT</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Por favor, completa el formulario a continuación para enviarnos un correo electrónico.</p>
+                <p>Email: <a href="mailto:CPC@chispascreativas.com">CPC@chispascreativas.com</a></p>
+            </div>
+            
+            <!-- ⚠️ IMPORTANTE: Reemplaza 'TU-EMAIL@GMAIL.COM' con tu email real -->
+            <form action="https://formsubmit.co/juanydiana0427abrik@gmail.com" method="POST">
+                <!-- Configuración de FormSubmit -->
+                <input type="hidden" name="_subject" value="✉️ Nuevo mensaje - Chispas Creativas">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <div class="form-group">
+                    <label for="name">NOMBRE</label>
+                    <input type="text" id="name" name="Nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-MAIL</label>
+                    <input type="email" id="email" name="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">ASUNTO</label>
+                    <input type="text" id="subject" name="Asunto" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">MENSAJE</label>
+                    <textarea id="message" name="Mensaje" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">ENVIAR</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Chispas Creativas. Todos los derechos reservados.</p>
+        <p>Diseñado con creatividad y pensamiento lateral</p>
+    </footer>
+
+    <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // Shop cart function
+        function addToCart(itemName) {
+            alert(`¡"${itemName}" agregado al carrito!\n\nEsta es una demo. En producción, esto se conectaría a un sistema de pagos real como Stripe o PayPal.`);
+        }
+
+        // Active navigation highlight
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = 'var(--accent)';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
